@@ -56,7 +56,8 @@ document.addEventListener('keydown', keydown);
 
 function keydown(e) {
   switch (e.keyCode) {
-    case 37: {
+    case 37:
+    case 65: {
       if (mergeDreapta) {
         break;
       }
@@ -73,7 +74,8 @@ function keydown(e) {
 
       }
     }
-    case 38: {
+    case 38:
+    case 87: {
       if (mergeJos) {
         break;
       }
@@ -85,7 +87,8 @@ function keydown(e) {
         return vel = { x: 0, y: -1 }
       }
     }
-    case 39: {
+    case 39:
+    case 68: {
       if (mergeStanga) {
         break;
       }
@@ -97,7 +100,8 @@ function keydown(e) {
         return vel = { x: 1, y: 0 }
       }
     }
-    case 40: {
+    case 40:
+    case 83: {
       if (mergeSus) {
         break;
       }
