@@ -4,6 +4,7 @@ const FOOD_COLOUR = '#e66916';
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+canvas.style = "position:absolute; left: 50%; width: 400px; margin-left: -200px;";
 
 canvas.width = canvas.height = 400;
 
@@ -118,6 +119,7 @@ setInterval(() => {
 function gameLoop() {
   ctx.fillStyle = BG_COLOUR;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  document.getElementById('scor').innerHTML="  Score: "+snake.length;
 
   ctx.fillStyle = SNAKE_COLOUR;
   for (let cell of snake) {
