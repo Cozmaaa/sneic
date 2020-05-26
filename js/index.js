@@ -50,7 +50,7 @@ function randomFood() {
     }
   }
 }
-
+velInit={x:0,y:0};
 document.addEventListener('keydown', keydown);
 
 function keydown(e) {
@@ -59,7 +59,8 @@ function keydown(e) {
       if (mergeDreapta) {
         break;
       }
-      else if (vel == { x: 0, y: 0 }) {
+      else if (JSON.stringify(vel)==JSON.stringify(velInit)) {
+
         break;
       }
       else {
