@@ -1,3 +1,5 @@
+/*jshint esversion:9*/
+/*jshint -W093*/
 const BG_COLOUR = '#231f20';
 const SNAKE_COLOUR = '#c2c2c2';
 const FOOD_COLOUR = '#e66916';
@@ -8,7 +10,7 @@ canvas.style = "position:absolute; left: 50%; width: 400px; margin-left: -200px;
 
 canvas.width = canvas.height = 400;
 
-const FR = 10;
+let FR = 10;
 const S = 20;
 const T = canvas.width / S;
 
@@ -22,7 +24,7 @@ snake = [
   { x: 8, y: 10 },
   { x: 9, y: 10 },
   { x: 10, y: 10 },
-]
+];
 vel = { x: 0, y: 0 };
 snakeInit = snake;
 function init() {
@@ -32,19 +34,26 @@ function init() {
     { x: 8, y: 10 },
     { x: 9, y: 10 },
     { x: 10, y: 10 },
-  ]
+  ];
 
 
   randomFood();
 }
+function dificultatePlus(){
+  FR+=2;
+  clearInterval(intervalId);
 
+}
+function dificultateMinus(){
+  FR-=2;
+}
 
 init();
 function randomFood() {
   food = {
     x: Math.floor(Math.random() * T),
     y: Math.floor(Math.random() * T),
-  }
+  };
   for (let cell of snake) {
     if (cell.x === food.x && food.y === cell.y) {
       return randomFood();
@@ -70,10 +79,10 @@ function keydown(e) {
         mergeJos = false;
         mergeDreapta = false;
         mergeSus = false;
-        return vel = { x: -1, y: 0 }
+        return vel = { x: -1, y: 0 };
 
       }
-    }
+    break;}
     case 38:
     case 87: {
       if (mergeJos) {
@@ -84,9 +93,9 @@ function keydown(e) {
         mergeStanga = false;
         mergeDreapta = false;
         mergeSus = true;
-        return vel = { x: 0, y: -1 }
+        return vel = { x: 0, y: -1 };
       }
-    }
+    break;}
     case 39:
     case 68: {
       if (mergeStanga) {
@@ -97,9 +106,9 @@ function keydown(e) {
         mergeJos = false;
         mergeStanga = false;
         mergeSus = false;
-        return vel = { x: 1, y: 0 }
+        return vel = { x: 1, y: 0 };
       }
-    }
+    break;}
     case 40:
     case 83: {
       if (mergeSus) {
@@ -110,21 +119,26 @@ function keydown(e) {
         mergeDreapta = false;
         mergeJos = true;
         mergeStanga = false;
-        return vel = { x: 0, y: 1 }
+        return vel = { x: 0, y: 1 };
       }
     }
   }
 }
 
-setInterval(() => {
-  requestAnimationFrame(gameLoop);
-}, 1000 / FR);
+  intervalId=  setInterval(() => {
+      requestAnimationFrame(gameLoop);
+    }, 1000 / FR);
+
+
+
 
 function gameLoop() {
+  console.log(FR);
   ctx.fillStyle = BG_COLOUR;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   document.getElementById('scor').innerHTML="  Score: "+snake.length;
-
+  document.getElementById('nivelDificultate').innerHTML="Nivel de viteza: "+FR;
+//Colorarea sarpelui + miscarile lui
   ctx.fillStyle = SNAKE_COLOUR;
   for (let cell of snake) {
     ctx.fillRect(cell.x * S, cell.y * S, S, S);
@@ -135,7 +149,7 @@ function gameLoop() {
 
   pos.x += vel.x;
   pos.y += vel.y;
-
+//Daca loveste peretele
   if (pos.x < 0 || pos.x > T || pos.y < 0 || pos.y > T) {
     init();
   }
@@ -152,6 +166,7 @@ function gameLoop() {
         return init();
       }
     }
+    //push adauga un termen la sfarsitul arrayului si shift taie primu terment
     snake.push({ ...pos });
     snake.shift();
   }

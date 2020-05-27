@@ -6,6 +6,12 @@
   <title>Snake in 5mins!</title>
  <style> h1 {text-align: center;}
  h1{font-size:40px;}
+ button{width: 100px;
+        height: 40px;
+ }
+ p{
+   font-size: 23px;
+ }
  </style>
  <font size='10'><h1 style='color:aqua' id='scor'></h1></font> 
 </head>
@@ -13,6 +19,9 @@
 <body style='background-color: black;'>
   <canvas id="canvas"></canvas>
   <script src="js/index.js"></script>
+  <button id='dificultate' onclick='dificultatePlus()' onclick='setInterval'>dificultate+</button><br>
+  <button id='dificultateMica' onclick='dificultateMinus()'>dificultate-</button>
+  <p style="color: azure;position: absolute;left:46%;margin-top: 340px;" id='nivelDificultate' >TEST</p>
 </body>
 
 </html>
